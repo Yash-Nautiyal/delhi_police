@@ -192,9 +192,9 @@ const DashboardView = () => {
         >
           <path
             fill="currentColor"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M2 6.634a4.634 4.634 0 1 1 9.268 0a4.634 4.634 0 0 1-9.268 0m10.732 10.732a4.634 4.634 0 1 1 9.268 0a4.634 4.634 0 0 1-9.268 0"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           />
           <path
             fill="currentColor"
@@ -335,8 +335,8 @@ const DashboardView = () => {
           <div className="theme-transition space-y-6 mb-10">
             <SummaryCards cards={cards} />
 
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-              <section className="xl:col-span-2 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm flex flex-col h-[410px]">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <section className="lg:col-span-2 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm flex flex-col h-[430px]">
                 <div className="flex items-center justify-between mb-4 ">
                   <div className="p-1 pl-6 mt-4 border-l-4 border-[var(--color-primary)]">
                     <h3 className="text-lg font-semibold">
@@ -357,7 +357,7 @@ const DashboardView = () => {
                   </div>
                 </div>
                 <div
-                  className="overflow-x-auto pl-5 pr-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1"
+                  className="overflow-auto bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1"
                   style={{
                     scrollbarColor: "var(--color-surface-dark) transparent",
                     scrollbarWidth: "thin",
@@ -366,13 +366,21 @@ const DashboardView = () => {
                   <table className="min-w-full text-sm">
                     <thead className="text-left text-[var(--color-text-secondary)]">
                       <tr>
-                        <th className="py-2 pr-4">District Name</th>
-                        <th className="py-2 pr-4">Number of Schools</th>
-                        <th className="py-2 pr-4">Number of Students</th>
-                        <th className="py-2 pr-4">
+                        <th className="py-2 pr-4 pl-10 h-8 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                          District Name
+                        </th>
+                        <th className="py-2 pr-4 h-8 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                          Number of Schools
+                        </th>
+                        <th className="py-2 pr-4 h-8 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                          Number of Students
+                        </th>
+                        <th className="py-2 pr-4 h-8 min-w-[150px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
                           Number of Activities conducted
                         </th>
-                        <th className="py-2 pr-4">Status</th>
+                        <th className="py-2 pr-4 h-10 min-w-[100px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                          Status
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -381,7 +389,7 @@ const DashboardView = () => {
                           key={district.name}
                           className="border-t border-[var(--color-border)]"
                         >
-                          <td className="py-3 pr-4 font-semibold">
+                          <td className="py-3 pr-4 pl-10 font-semibold">
                             {district.name}
                           </td>
                           <td className="py-3 pr-4">{district.schools}</td>
@@ -405,8 +413,8 @@ const DashboardView = () => {
                     </h3>
                   </div>
                 </div>
-                <div className="p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex flex-1">
-                  <div className="h-64 sm:h-72 mb-4 max-w-xl mx-auto flex-1">
+                <div className="p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1">
+                  <div className="h-64 sm:h-80 max-w-xl mx-auto">
                     <StatesPieChart
                       showArcLabels
                       stateBudgetData={activities.map((a) => ({

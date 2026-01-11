@@ -258,9 +258,9 @@ const StudentView = () => {
         >
           <path
             fill="currentColor"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M2 6.634a4.634 4.634 0 1 1 9.268 0a4.634 4.634 0 0 1-9.268 0m10.732 10.732a4.634 4.634 0 1 1 9.268 0a4.634 4.634 0 0 1-9.268 0"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           />
           <path
             fill="currentColor"
@@ -345,36 +345,18 @@ const StudentView = () => {
     },
   ];
 
-  const renderBar = (label, count, max) => {
-    const pct = max ? Math.round((count / max) * 100) : 0;
-    return (
-      <div key={label} className="space-y-1">
-        <div className="flex items-center justify-between text-sm">
-          <span>{label}</span>
-          <span className="text-[var(--color-text-secondary)]">{count}</span>
-        </div>
-        <div className="h-2 w-full bg-[var(--color-surface-hover)] rounded-full overflow-hidden">
-          <div
-            className="h-full bg-[var(--color-primary)]"
-            style={{ width: `${pct}%` }}
-          />
-        </div>
-      </div>
-    );
-  };
-
   const renderBadge = (status) => {
     const colorMap = {
       Active:
-        "bg-[var(--color-success-light)] text-[var(--color-success)] border border-[var(--color-success)]/20",
+        "bg-[var(--color-success-light)] text-[var(--color-success)] border border-[var(--color-success)]",
       Inactive:
-        "bg-[var(--color-error-light)] text-[var(--color-error)] border border-[var(--color-error)]/20",
+        "bg-[var(--color-error-light)] text-[var(--color-error)] border border-[var(--color-error)]",
       Pending:
         "bg-[var(--color-surface-hover)] text-[var(--color-text-secondary)] border border-[var(--color-border)]",
       "In Progress":
-        "bg-[var(--color-warning-light)] text-[var(--color-warning)] border border-[var(--color-warning)]/20",
+        "bg-[var(--color-warning-light)] text-[var(--color-warning)] border border-[var(--color-warning)]",
       Resolved:
-        "bg-[var(--color-success-light)] text-[var(--color-success)] border border-[var(--color-success)]/20",
+        "bg-[var(--color-success-light)] text-[var(--color-success)] border border-[var(--color-success)]",
       Closed:
         "bg-[var(--color-surface-hover)] text-[var(--color-text-secondary)] border border-[var(--color-border)]",
     };
@@ -485,7 +467,7 @@ const StudentView = () => {
           <div className="theme-transition space-y-6 mb-10">
             <SummaryCards cards={cards} />
 
-            <section className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm h-[410px] flex flex-col">
+            <section className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm h-[450px] sm:h-[430px] flex flex-col">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
                 <div className="p-1 pl-6 mt-4 border-l-4 border-[var(--color-primary)]">
                   <h3 className="text-lg font-semibold">Student Directory</h3>
@@ -546,16 +528,28 @@ const StudentView = () => {
                   </select>
                 </div>
               </div>
-              <div className="overflow-x-auto p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1">
+              <div className="overflow-auto bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1">
                 <table className="min-w-full text-sm">
                   <thead className="text-left text-[var(--color-text-secondary)]">
                     <tr>
-                      <th className="py-2 pr-4">Student Name</th>
-                      <th className="py-2 pr-4">Grade</th>
-                      <th className="py-2 pr-4">School Name</th>
-                      <th className="py-2 pr-4">District</th>
-                      <th className="py-2 pr-4">Designation</th>
-                      <th className="py-2 pr-4">Status</th>
+                      <th className="py-2 pr-4 pl-10 h-12 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                        Student Name
+                      </th>
+                      <th className="py-2 pr-4 h-12 sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                        Grade
+                      </th>
+                      <th className="py-2 pr-4 h-12 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                        School Name
+                      </th>
+                      <th className="py-2 pr-4 h-12 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                        District
+                      </th>
+                      <th className="py-2 pr-4 h-12 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                        Designation
+                      </th>
+                      <th className="py-2 pr-4 h-12 min-w-[100px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                        Status
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -564,7 +558,9 @@ const StudentView = () => {
                         key={s.name}
                         className="border-t border-[var(--color-border)]"
                       >
-                        <td className="py-3 pr-4 font-semibold">{s.name}</td>
+                        <td className="py-3 pr-4 pl-10 font-semibold">
+                          {s.name}
+                        </td>
                         <td className="py-3 pr-4">{s.grade}</td>
                         <td className="py-3 pr-4">{s.school}</td>
                         <td className="py-3 pr-4">{s.district}</td>
@@ -643,18 +639,22 @@ const StudentView = () => {
                   Reporting & Escalation Log
                 </h3>
               </div>
-              <div className="overflow-x-auto p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl">
+              <div className="overflow-auto bg-[var(--color-surface-secondary)] rounded-b-2xl">
                 <table className="min-w-full text-sm">
                   <thead className="text-left text-[var(--color-text-secondary)]">
                     <tr>
-                      <th className="py-2 pr-4">
+                      <th className="py-2 pr-4 pl-10 h-12 min-w-[170px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
                         Cyber concerns reported by students
                       </th>
-                      <th className="py-2 pr-4">Date</th>
-                      <th className="py-2 pr-4">
+                      <th className="py-2 pr-4 h-12 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                        Date
+                      </th>
+                      <th className="py-2 pr-4 h-12 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
                         Escalated to (Teacher / Authority)
                       </th>
-                      <th className="py-2 pr-4">Status</th>
+                      <th className="py-2 pr-4 h-12 min-w-[130px] sticky top-0 z-10 bg-[var(--color-surface-hover)]">
+                        Status
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -663,7 +663,7 @@ const StudentView = () => {
                         key={`${log.concern}-${idx}`}
                         className="border-t border-[var(--color-border)]"
                       >
-                        <td className="py-3 pr-4">
+                        <td className="py-3 pr-4 pl-10">
                           <span className="font-semibold">{log.concern}</span>
                           <span className="text-[var(--color-text-secondary)]">
                             {" "}
