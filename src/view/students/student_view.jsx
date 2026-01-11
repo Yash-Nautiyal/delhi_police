@@ -62,6 +62,86 @@ const students = [
     activities: 5,
     trainings: 2,
   },
+  {
+    name: "Neha Bansal",
+    grade: "8",
+    school: "Sarvodaya Vidyalaya - Lajpat Nagar",
+    district: "South East Delhi",
+    designation: "Cyber Discipline Coordinator",
+    status: "Active",
+    activities: 3,
+    trainings: 1,
+  },
+  {
+    name: "Ankit Verma",
+    grade: "9",
+    school: "Government Boys School - Karol Bagh",
+    district: "Central Delhi",
+    designation: "Cyber Awareness Leader",
+    status: "Active",
+    activities: 4,
+    trainings: 2,
+  },
+  {
+    name: "Simran Kaur",
+    grade: "11",
+    school: "Govt. Co-ed School - Punjabi Bagh",
+    district: "West Delhi",
+    designation: "Chief Cyber Security Dost",
+    status: "Active",
+    activities: 6,
+    trainings: 3,
+  },
+  {
+    name: "Farhan Ali",
+    grade: "8",
+    school: "Govt. School - Narela",
+    district: "North West Delhi",
+    designation: "Cyber Discipline Coordinator",
+    status: "Inactive",
+    activities: 1,
+    trainings: 1,
+  },
+  {
+    name: "Priya Sharma",
+    grade: "9",
+    school: "Govt. Girls School - Khanpur",
+    district: "South Delhi",
+    designation: "Cyber Awareness Leader",
+    status: "Active",
+    activities: 5,
+    trainings: 2,
+  },
+  {
+    name: "Rahul Mehta",
+    grade: "11",
+    school: "Govt. Boys School - Janakpuri",
+    district: "West Delhi",
+    designation: "Chief Cyber Security Dost",
+    status: "Active",
+    activities: 7,
+    trainings: 3,
+  },
+  {
+    name: "Vidhi Gupta",
+    grade: "9",
+    school: "Govt. School - Model Town",
+    district: "North Delhi",
+    designation: "Cyber Awareness Leader",
+    status: "Active",
+    activities: 4,
+    trainings: 2,
+  },
+  {
+    name: "Kunal Rao",
+    grade: "8",
+    school: "Govt. School - Dwarka",
+    district: "South West Delhi",
+    designation: "Cyber Discipline Coordinator",
+    status: "Pending",
+    activities: 2,
+    trainings: 1,
+  },
 ];
 
 const reportingLog = [
@@ -91,6 +171,34 @@ const reportingLog = [
     student: "Kabir Malhotra",
     date: "2025-12-26",
     escalatedTo: "Authority",
+    status: "Pending",
+  },
+  {
+    concern: "Malicious app link shared",
+    student: "Priya Sharma",
+    date: "2026-01-06",
+    escalatedTo: "Teacher",
+    status: "In Progress",
+  },
+  {
+    concern: "Anonymous bullying comments",
+    student: "Simran Kaur",
+    date: "2026-01-07",
+    escalatedTo: "Authority",
+    status: "Resolved",
+  },
+  {
+    concern: "Phishing email to parents",
+    student: "Rahul Mehta",
+    date: "2026-01-05",
+    escalatedTo: "Teacher",
+    status: "Closed",
+  },
+  {
+    concern: "Fake scholarship message",
+    student: "Neha Bansal",
+    date: "2025-12-30",
+    escalatedTo: "Teacher",
     status: "Pending",
   },
 ];
@@ -141,8 +249,44 @@ const StudentView = () => {
       label: "Dashboard",
       onClick: () => navigate("/dashboard"),
       active: false,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M2 6.634a4.634 4.634 0 1 1 9.268 0a4.634 4.634 0 0 1-9.268 0m10.732 10.732a4.634 4.634 0 1 1 9.268 0a4.634 4.634 0 0 1-9.268 0"
+            clip-rule="evenodd"
+          />
+          <path
+            fill="currentColor"
+            d="M2 17.5c0-2.121 0-3.182.659-3.841S4.379 13 6.5 13s3.182 0 3.841.659S11 15.379 11 17.5s0 3.182-.659 3.841S8.621 22 6.5 22s-3.182 0-3.841-.659S2 19.621 2 17.5m11-11c0-2.121 0-3.182.659-3.841S15.379 2 17.5 2s3.182 0 3.841.659S22 4.379 22 6.5s0 3.182-.659 3.841S19.621 11 17.5 11s-3.182 0-3.841-.659S13 8.621 13 6.5"
+          />
+        </svg>
+      ),
     },
-    { label: "Students", onClick: () => navigate("/students"), active: true },
+    {
+      label: "Students",
+      onClick: () => navigate("/students"),
+      active: true,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 12 12"
+        >
+          <path
+            fill="currentColor"
+            d="M5.16 2.189a1.96 1.96 0 0 1 1.68 0l4.874 2.309a.5.5 0 0 1 .008.9l-4.85 2.406a1.96 1.96 0 0 1-1.744 0L1 5.756V8a.5.5 0 0 1-1 0V4.975a.5.5 0 0 1 .286-.477zM2 7.369V9a.5.5 0 0 0 .147.354l.002.003l.023.021l.06.056q.075.07.217.187c.187.153.457.355.794.558C3.913 10.58 4.877 11 6 11s2.088-.42 2.757-.821a6.7 6.7 0 0 0 1.012-.745l.06-.056l.016-.016l.006-.006l.001-.001l.002-.001A.5.5 0 0 0 10 9V7.368L7.316 8.7a2.96 2.96 0 0 1-2.632 0z"
+          />
+        </svg>
+      ),
+    },
   ];
 
   const designationDistribution = useMemo(() => {
@@ -341,16 +485,12 @@ const StudentView = () => {
           <div className="theme-transition space-y-6 mb-10">
             <SummaryCards cards={cards} />
 
-            <section className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] p-5 shadow-sm">
+            <section className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm h-[410px] flex flex-col">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
-                <div>
+                <div className="p-1 pl-6 mt-4 border-l-4 border-[var(--color-primary)]">
                   <h3 className="text-lg font-semibold">Student Directory</h3>
-                  <p className="text-sm text-[var(--color-text-secondary)]">
-                    Columns: Student Name · Grade (8 / 9 / 11) · School Name ·
-                    District · Designation · Status
-                  </p>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-4 ml-4 mr-4">
                   <select
                     value={filters.grade}
                     onChange={(e) =>
@@ -406,7 +546,7 @@ const StudentView = () => {
                   </select>
                 </div>
               </div>
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1">
                 <table className="min-w-full text-sm">
                   <thead className="text-left text-[var(--color-text-secondary)]">
                     <tr>
@@ -447,12 +587,12 @@ const StudentView = () => {
                   </div>
                 </div>
                 <div className="p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex flex-1 ">
-                  <div className="flex-1">
+                  <div className="h-64 sm:h-72 w-full">
                     <StatesPieChart
                       stateBudgetData={designationPieData}
                       formatBudget={(v) => v}
-                      showArcLabels
                       innerRadius={0.1}
+                      enableArcLabels={true}
                       padAngle={1.5}
                       cornerRadius={7}
                       activeOuterRadiusOffset={12}
@@ -469,13 +609,14 @@ const StudentView = () => {
                   </div>
                 </div>
                 <div className="p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex flex-1 ">
-                  <div className="flex-1">
+                  <div className="h-64 sm:h-72 w-full">
                     <StatesPieChart
                       stateBudgetData={gradePieData}
                       formatBudget={(v) => v}
-                      showArcLabels
+                      showArcLabels={true}
                       innerRadius={0.49}
-                      padAngle={1.5}
+                      padAngle={2}
+                      cornerRadius={7}
                     />
                   </div>
                 </div>
@@ -488,19 +629,21 @@ const StudentView = () => {
                     </h3>
                   </div>
                 </div>
-                <div className="p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1 ">
-                  <div className="h-72">
+                <div className="pt-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1 ">
+                  <div className="h-64 sm:h-72">
                     <ParticipationChart data={students} />
                   </div>
                 </div>
               </div>
             </section>
 
-            <section className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] p-5 shadow-sm">
-              <h3 className="text-lg font-semibold mb-3">
-                Reporting & Escalation Log
-              </h3>
-              <div className="overflow-x-auto">
+            <section className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm">
+              <div className="p-1 pl-6 mt-4 mb-4 border-l-4 border-[var(--color-primary)] ">
+                <h3 className="text-lg font-semibold">
+                  Reporting & Escalation Log
+                </h3>
+              </div>
+              <div className="overflow-x-auto p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl">
                 <table className="min-w-full text-sm">
                   <thead className="text-left text-[var(--color-text-secondary)]">
                     <tr>

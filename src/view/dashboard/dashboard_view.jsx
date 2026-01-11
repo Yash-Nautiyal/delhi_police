@@ -48,13 +48,48 @@ const districtData = [
     activities: 12,
     status: "Pending",
   },
+  {
+    name: "South Delhi",
+    schools: 14,
+    students: 310,
+    activities: 28,
+    status: "Active",
+  },
+  {
+    name: "North West Delhi",
+    schools: 11,
+    students: 245,
+    activities: 24,
+    status: "Partial",
+  },
+  {
+    name: "West Delhi",
+    schools: 13,
+    students: 295,
+    activities: 26,
+    status: "Active",
+  },
+  {
+    name: "Central Delhi",
+    schools: 9,
+    students: 205,
+    activities: 18,
+    status: "Partial",
+  },
+  {
+    name: "South East Delhi",
+    schools: 10,
+    students: 230,
+    activities: 19,
+    status: "Pending",
+  },
 ];
 
 const activities = [
-  { type: "Cyber safety workshops", count: 14 },
-  { type: "Cyber awareness rallies", count: 10 },
-  { type: "Poster & slogan competitions", count: 8 },
-  { type: "Online safety pledge drives", count: 11 },
+  { type: "Cyber safety workshops", count: 22 },
+  { type: "Cyber awareness rallies", count: 18 },
+  { type: "Poster & slogan competitions", count: 16 },
+  { type: "Online safety pledge drives", count: 20 },
 ];
 
 const curriculum = [
@@ -144,16 +179,56 @@ const DashboardView = () => {
   ];
 
   const navLinks = [
-    { label: "Dashboard", onClick: () => navigate("/dashboard"), active: true },
-    { label: "Students", onClick: () => navigate("/students"), active: false },
+    {
+      label: "Dashboard",
+      onClick: () => navigate("/dashboard"),
+      active: true,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M2 6.634a4.634 4.634 0 1 1 9.268 0a4.634 4.634 0 0 1-9.268 0m10.732 10.732a4.634 4.634 0 1 1 9.268 0a4.634 4.634 0 0 1-9.268 0"
+            clip-rule="evenodd"
+          />
+          <path
+            fill="currentColor"
+            d="M2 17.5c0-2.121 0-3.182.659-3.841S4.379 13 6.5 13s3.182 0 3.841.659S11 15.379 11 17.5s0 3.182-.659 3.841S8.621 22 6.5 22s-3.182 0-3.841-.659S2 19.621 2 17.5m11-11c0-2.121 0-3.182.659-3.841S15.379 2 17.5 2s3.182 0 3.841.659S22 4.379 22 6.5s0 3.182-.659 3.841S19.621 11 17.5 11s-3.182 0-3.841-.659S13 8.621 13 6.5"
+          />
+        </svg>
+      ),
+    },
+    {
+      label: "Students",
+      onClick: () => navigate("/students"),
+      active: false,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 12 12"
+        >
+          <path
+            fill="currentColor"
+            d="M5.16 2.189a1.96 1.96 0 0 1 1.68 0l4.874 2.309a.5.5 0 0 1 .008.9l-4.85 2.406a1.96 1.96 0 0 1-1.744 0L1 5.756V8a.5.5 0 0 1-1 0V4.975a.5.5 0 0 1 .286-.477zM2 7.369V9a.5.5 0 0 0 .147.354l.002.003l.023.021l.06.056q.075.07.217.187c.187.153.457.355.794.558C3.913 10.58 4.877 11 6 11s2.088-.42 2.757-.821a6.7 6.7 0 0 0 1.012-.745l.06-.056l.016-.016l.006-.006l.001-.001l.002-.001A.5.5 0 0 0 10 9V7.368L7.316 8.7a2.96 2.96 0 0 1-2.632 0z"
+          />
+        </svg>
+      ),
+    },
   ];
 
   const renderBadge = (status) => {
     const colorMap = {
       Active:
-        "bg-[var(--color-success-light)] text-[var(--color-success)] border border-[var(--color-success)]/20",
+        "bg-[var(--color-success-light)] text-[var(--color-success)] border border-[var(--color-success)]",
       Partial:
-        "bg-[var(--color-warning-light)] text-[var(--color-warning)] border border-[var(--color-warning)]/20",
+        "bg-[var(--color-warning-light)] text-[var(--color-warning)] border border-[var(--color-warning)]",
       Pending:
         "bg-[var(--color-surface-hover)] text-[var(--color-text-secondary)] border border-[var(--color-border)]",
     };
@@ -163,24 +238,6 @@ const DashboardView = () => {
       >
         {status}
       </span>
-    );
-  };
-
-  const renderBarRow = (label, value, max = 100) => {
-    const pct = Math.min(100, Math.round((value / max) * 100));
-    return (
-      <div className="space-y-1">
-        <div className="flex items-center justify-between text-sm">
-          <span>{label}</span>
-          <span className="text-[var(--color-text-secondary)]">{value}</span>
-        </div>
-        <div className="h-2 w-full bg-[var(--color-surface-hover)] rounded-full overflow-hidden">
-          <div
-            className="h-full bg-[var(--color-primary)]"
-            style={{ width: `${pct}%` }}
-          />
-        </div>
-      </div>
     );
   };
 
@@ -279,29 +336,33 @@ const DashboardView = () => {
             <SummaryCards cards={cards} />
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-              <section className="xl:col-span-2 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] p-5 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
+              <section className="xl:col-span-2 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm flex flex-col h-[410px]">
+                <div className="flex items-center justify-between mb-4 ">
+                  <div className="p-1 pl-6 mt-4 border-l-4 border-[var(--color-primary)]">
                     <h3 className="text-lg font-semibold">
                       District-wise Overview
                     </h3>
-                    <p className="text-sm text-[var(--color-text-secondary)]">
-                      District Name · Number of Schools · Number of Students ·
-                      Number of Activities conducted · Status
-                    </p>
                   </div>
-                  <select
-                    value={districtFilter}
-                    onChange={(e) => setDistrictFilter(e.target.value)}
-                    className="border border-[var(--color-border)] rounded-lg px-3 py-2 text-sm bg-[var(--color-surface)] text-[var(--color-text)]"
-                  >
-                    <option>All Districts</option>
-                    {districtData.map((d) => (
-                      <option key={d.name}>{d.name}</option>
-                    ))}
-                  </select>
+                  <div className="mr-4 mt-4">
+                    <select
+                      value={districtFilter}
+                      onChange={(e) => setDistrictFilter(e.target.value)}
+                      className="border border-[var(--color-border)] rounded-lg px-3 py-2 text-sm bg-[var(--color-surface)] text-[var(--color-text)]"
+                    >
+                      <option>All Districts</option>
+                      {districtData.map((d) => (
+                        <option key={d.name}>{d.name}</option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-                <div className="overflow-x-auto">
+                <div
+                  className="overflow-x-auto pl-5 pr-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1"
+                  style={{
+                    scrollbarColor: "var(--color-surface-dark) transparent",
+                    scrollbarWidth: "thin",
+                  }}
+                >
                   <table className="min-w-full text-sm">
                     <thead className="text-left text-[var(--color-text-secondary)]">
                       <tr>
@@ -336,7 +397,7 @@ const DashboardView = () => {
                 </div>
               </section>
 
-              <section className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm">
+              <section className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm flex flex-col">
                 <div>
                   <div className="p-1 pl-6 mt-4 mb-4 border-l-4 border-[var(--color-primary)] ">
                     <h3 className="text-lg font-semibold">
@@ -344,8 +405,8 @@ const DashboardView = () => {
                     </h3>
                   </div>
                 </div>
-                <div className="p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl">
-                  <div className="h-72 mb-4 max-w-xl mx-auto">
+                <div className="p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex flex-1">
+                  <div className="h-64 sm:h-72 mb-4 max-w-xl mx-auto flex-1">
                     <StatesPieChart
                       showArcLabels
                       stateBudgetData={activities.map((a) => ({
@@ -361,11 +422,13 @@ const DashboardView = () => {
             </div>
 
             <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <div className="lg:col-span-2 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] p-5 shadow-sm">
-                <h3 className="text-lg font-semibold mb-3">
-                  Curriculum & Module Progress
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="lg:col-span-2 bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm flex flex-col">
+                <div className="p-1 pl-6 mt-4 mb-4 border-l-4 border-[var(--color-primary)] ">
+                  <h3 className="text-lg font-semibold">
+                    Curriculum & Module Progress
+                  </h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-5 flex-1 bg-[var(--color-surface-secondary)] rounded-b-2xl">
                   {curriculum.map((m) => (
                     <div
                       key={m.name}
@@ -397,7 +460,7 @@ const DashboardView = () => {
                   </div>
                 </div>
                 <div className="p-5 bg-[var(--color-surface-secondary)] rounded-b-2xl flex-1">
-                  <div className="h-80 max-w-xl mx-auto">
+                  <div className="h-64 sm:h-80 max-w-xl mx-auto">
                     <OutcomesRadialChart
                       data={[
                         {

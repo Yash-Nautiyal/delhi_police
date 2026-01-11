@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { ResponsivePie } from "@nivo/pie";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const defaultFormatBudget = (value) =>
   Number.isFinite(value) ? value.toLocaleString("en-IN") : value;
@@ -8,7 +9,7 @@ const buildPalette = (count, seedHue) =>
   Array.from({ length: count }, (_, idx) => {
     const hue = (seedHue + idx * (360 / count)) % 360;
     // Muted, modern palette (less saturated / less bright than the default)
-    return `hsl(${hue}, 42%, 52%)`;
+    return `hsl(${hue}, 49%, 52%)`;
   });
 
 const truncateLabel = (label, max) => {
@@ -36,6 +37,9 @@ const StatesPieChart = ({
   arcLabelsSkipAngle = 30,
   arcLabelsRadiusOffset = 0.7,
   enableArcLabels = false,
+  // Back-compat prop names used in some views
+  showArcLabels,
+  showArcLinkLabels,
   motionConfig = "gentle",
   transitionMode = "pushIn",
   customColors,
@@ -55,6 +59,8 @@ const StatesPieChart = ({
   theme,
   ...pieProps
 }) => {
+  const isMobile = useMediaQuery("(max-width: 640px)");
+
   const processedData = useMemo(
     () =>
       stateBudgetData.map((state) => ({
@@ -64,6 +70,13 @@ const StatesPieChart = ({
       })),
     [stateBudgetData, maxLabelLength]
   );
+
+  const resolvedEnableArcLabels =
+    typeof showArcLabels === "boolean" ? showArcLabels : enableArcLabels;
+  const resolvedEnableArcLinkLabels =
+    typeof showArcLinkLabels === "boolean"
+      ? showArcLinkLabels
+      : enableArcLinkLabels;
 
   // Stable per-instance seed allows unique charts while staying deterministic
   const seedHue = useMemo(
@@ -81,16 +94,18 @@ const StatesPieChart = ({
   const resolvedMargin = useMemo(() => {
     if (margin) return margin;
     return {
-      top: 20,
-      right: 20,
+      top: isMobile ? 10 : 20,
+      right: isMobile ? 10 : 20,
       // If legend is rendered outside the SVG, the chart doesn't need extra bottom padding.
       bottom:
         showLegend && legendMode === "nivo"
           ? Math.max(70, legendTranslateY + 20)
+          : isMobile
+          ? 10
           : 20,
-      left: 20,
+      left: isMobile ? 10 : 20,
     };
-  }, [legendMode, legendTranslateY, margin, showLegend]);
+  }, [isMobile, legendMode, legendTranslateY, margin, showLegend]);
 
   const resolvedTheme = useMemo(() => {
     if (theme) return theme;
@@ -143,14 +158,14 @@ const StatesPieChart = ({
           arcLinkLabelsDiagonalLength={arcLinkLabelsDiagonalLength}
           arcLinkLabelsStraightLength={arcLinkLabelsStraightLength}
           arcLinkLabelsTextOffset={arcLinkLabelsTextOffset}
-          enableArcLinkLabels={enableArcLinkLabels}
+          enableArcLinkLabels={isMobile ? false : resolvedEnableArcLinkLabels}
           arcLinkLabel={(d) => d.data.shortLabel}
           arcLinkLabelsThickness={1.5}
           arcLinkLabelsColor={{ from: "color" }}
           arcLinkLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
           arcLabelsSkipAngle={arcLabelsSkipAngle}
           arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
-          enableArcLabels={enableArcLabels}
+          enableArcLabels={isMobile ? false : resolvedEnableArcLabels}
           arcLabelsRadiusOffset={arcLabelsRadiusOffset}
           tooltip={({ datum }) => (
             <div className="bg-[var(--color-surface)] p-2 shadow-lg rounded-md border border-[var(--color-border)]">
@@ -243,7 +258,7 @@ const StatesPieChart = ({
               <div
                 key={item.id}
                 className="flex items-center gap-2 min-w-0"
-                style={{ fontSize: legendFontSize }}
+                style={{ fontSize: isMobile ? 11 : legendFontSize }}
               >
                 <span
                   className="inline-block rounded-full"
@@ -257,7 +272,7 @@ const StatesPieChart = ({
                 <span
                   title={item.label}
                   className="truncate text-[var(--color-text)]"
-                  style={{ maxWidth: legendItemMaxWidth }}
+                  style={{ maxWidth: isMobile ? 110 : legendItemMaxWidth }}
                 >
                   {item.label}
                 </span>

@@ -49,7 +49,7 @@ const Sidebar = ({
         {/* Sidebar Header */}
         <div className="p-4 flex items-center justify-between shrink-0">
           <img
-            src="assets/ministry.png"
+            src="assets/logo.png"
             alt="Logo"
             className="w-32 object-cover"
           />

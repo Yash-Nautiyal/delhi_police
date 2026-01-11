@@ -1,6 +1,8 @@
 import { ResponsiveRadar } from "@nivo/radar";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const OutcomesRadialChart = ({ data }) => {
+  const isMobile = useMediaQuery("(max-width: 640px)");
   return (
     <div className="h-full animate-fade-up">
       <ResponsiveRadar
@@ -8,21 +10,25 @@ const OutcomesRadialChart = ({ data }) => {
         keys={["value"]}
         indexBy="metric"
         maxValue={100}
-        margin={{ top: 40, right: 80, bottom: 40, left: 80 }}
+        margin={
+          isMobile
+            ? { top: 24, right: 34, bottom: 24, left: 34 }
+            : { top: 40, right: 80, bottom: 40, left: 80 }
+        }
         curve="linearClosed"
         borderWidth={2}
         borderColor={{ from: "color" }}
         gridLevels={5}
         gridShape="circular"
-        gridLabelOffset={16}
+        gridLabelOffset={isMobile ? 10 : 16}
         enableDots={true}
-        dotSize={8}
+        dotSize={isMobile ? 6 : 8}
         dotColor={{ theme: "background" }}
         dotBorderWidth={2}
         dotBorderColor={{ from: "color" }}
         enableDotLabel={true}
         dotLabel="value"
-        dotLabelYOffset={-12}
+        dotLabelYOffset={isMobile ? -10 : -12}
         colors={{ scheme: "nivo" }}
         fillOpacity={0.25}
         blendMode="multiply"
@@ -34,7 +40,7 @@ const OutcomesRadialChart = ({ data }) => {
             ticks: {
               text: {
                 fill: "var(--color-text-secondary)",
-                fontSize: 13,
+                fontSize: isMobile ? 11 : 13,
                 fontWeight: 600,
               },
             },
@@ -48,7 +54,7 @@ const OutcomesRadialChart = ({ data }) => {
           dots: {
             text: {
               fill: "var(--color-text)",
-              fontSize: 13,
+              fontSize: isMobile ? 11 : 13,
               fontWeight: 700,
             },
           },

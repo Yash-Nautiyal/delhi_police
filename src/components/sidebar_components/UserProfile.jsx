@@ -12,7 +12,7 @@ const UserProfile = ({ isOpen, isPsuUser, userPsu, userOrg }) => (
             : "assets/icon.png"
           : userOrg == "NSTFDC"
           ? "assets/nsfdc_logo.png"
-          : "assets/icon.png"
+          : "assets/logo.png"
       }
       alt="User Profile"
       className=" h-10 object-cover"
