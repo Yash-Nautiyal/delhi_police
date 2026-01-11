@@ -178,7 +178,7 @@ const StatesPieChart = ({
                   style={{ backgroundColor: datum.color }}
                 ></span>
                 <span className="text-[var(--color-text)]">
-                  Budget: ₹{formatBudget(datum.value)}
+                  {formatBudget(datum.value)}
                 </span>
               </div>
             </div>
